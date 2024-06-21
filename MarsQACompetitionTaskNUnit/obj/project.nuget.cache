@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "zU1cYAUJH5Lia9YC90GaRqNp+TZpYtrZnnqCgB7pV5mdrtQrHJpQEJd/lKDfSUWW7KZvjsBaVOityjy/VM0f6w==",
+  "dgSpecHash": "7o5jBTsIlgYcPK91B/GCCwmfLh7IW3wkkrfcRX9fSz5Ln6tFa+cL+XDsH8FALKde+jVKrRWHehht78ss69N85w==",
   "success": true,
   "projectFilePath": "C:\\Users\\Lenovo\\Prasanna\\MarsCompetitionTask\\MarsQACompetitionTaskNUnit\\MarsQACompetitionTaskNUnit.csproj",
   "expectedPackageFiles": [
@@ -103,7 +103,7 @@
     "C:\\Users\\Lenovo\\.nuget\\packages\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.2\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\selenium.support\\4.21.0\\selenium.support.4.21.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\selenium.webdriver\\4.21.0\\selenium.webdriver.4.21.0.nupkg.sha512",
-    "C:\\Users\\Lenovo\\.nuget\\packages\\selenium.webdriver.chromedriver\\125.0.6422.14100\\selenium.webdriver.chromedriver.125.0.6422.14100.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\selenium.webdriver.chromedriver\\126.0.6478.6200\\selenium.webdriver.chromedriver.126.0.6478.6200.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\sharpcompress\\0.23.0\\sharpcompress.0.23.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",

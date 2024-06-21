@@ -69,6 +69,30 @@ namespace MarsQACompetitionTaskNUnit.Pages
 
         }
 
+        public void CreateCertificationWithSomeData(string From, string Year)
+        {
+            // Click on Add New button
+            WaitUtils.WaitToBeVisible(driver, "Xpath", "AddNewButton", 10);
+            AddNewButton.Click();
+
+            // Enter Certified From data
+            CertifiedFromTextbox.Click();
+            CertifiedFromTextbox.SendKeys(From);
+
+
+            // Select CertificationYear from dropdown list
+            WaitUtils.WaitToBeVisible(driver, "Xpath", "YearDropdown", 5);
+            YearDropdown.Click();
+            driver.FindElement(By.XPath("//*[@value='" + Year + "']")).Click();
+
+
+            // Click on save button
+            WaitUtils.WaitToBeVisible(driver, "Xpath", "AddButton", 5);
+            AddButton.Click();
+            Thread.Sleep(1000);
+
+        }
+
         public bool IsCertificationRecordPresent(string Certificate, string From, string Year, int rowNumber = 0)
         {
             bool recordPresent = false;
@@ -161,7 +185,7 @@ namespace MarsQACompetitionTaskNUnit.Pages
 
 
             UpdateButton.Click();
-            //Thread.Sleep(5000);
+            Thread.Sleep(5000);
         }
 
         public void DeleteLastCertificationRecords()

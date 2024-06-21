@@ -11,12 +11,11 @@ namespace MarsQACompetitionTaskNUnit.Utilities
 
         public static ExtentReports GetExtent()
         {
-            var reportPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"..\..\..\..\Reports\";
-
             if (extent == null)
             {
+                var reportPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"..\..\..\..\Reports\");                                     
                 Directory.CreateDirectory(reportPath);
-                var htmlReporter = new ExtentHtmlReporter(reportPath);               
+                var htmlReporter = new ExtentHtmlReporter(Path.Combine(reportPath, "ExtentReport.html"));
                 extent = new ExtentReports();
                 extent.AttachReporter(htmlReporter);
             }

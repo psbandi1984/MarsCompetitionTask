@@ -13,6 +13,7 @@ namespace MarsQACompetitionTaskNUnit.Pages
         public LoginPage(IWebDriver driver) : base(driver)
         {
             this.driver = driver;
+
         }
 
         //Web Elements
@@ -24,9 +25,10 @@ namespace MarsQACompetitionTaskNUnit.Pages
         //Method
         public void ClickSignIn()
         {
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             //WaitUtils.WaitToBeClickable(driver, "Xpath", "SignINButton", 30);
             SignINButton.Click();
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
            
         }
 
@@ -39,14 +41,5 @@ namespace MarsQACompetitionTaskNUnit.Pages
             LoginButton.Click();
         }
 
-        //public void InvalidLoginSteps(string EmailAddress, string Password)
-        //{
-                       
-        //    EmailAddressTextbox.SendKeys(EmailAddress);
-        //    PasswordTextbox.SendKeys(Password);
-
-        //    WaitUtils.WaitToBeClickable(driver, "Xpath", "LoginButton", 10);
-        //    LoginButton.Click();
-        //}
     }
 }

@@ -83,6 +83,33 @@ namespace MarsQACompetitionTaskNUnit.Pages
 
         }
 
+        public void CreateEducationWithSomeData(string Country, string Title, string GraduationYear)
+        {
+            // Click on Add New button
+            WaitUtils.WaitToBeVisible(driver, "Xpath", "AddNewButton", 20);
+            AddNewButton.Click();
+
+            // Select Country from dropdown list
+            WaitUtils.WaitToBeVisible(driver, "Xpath", "CountryDropdown", 5);
+            CountryDropdown.Click();
+            driver.FindElement(By.XPath("//*[@value='" + Country + "']")).Click();
+
+            // Select Title from dropdown list
+            WaitUtils.WaitToBeVisible(driver, "Xpath", "TitleDropdown", 5);
+            TitleDropdown.Click();
+            driver.FindElement(By.XPath("//*[@value='" + Title + "']")).Click();
+
+            // Select GraduationYear from dropdown list
+            WaitUtils.WaitToBeVisible(driver, "Xpath", "GraduationYearDropdown", 5);
+            GraduationYearDropdown.Click();
+            driver.FindElement(By.XPath("//*[@value='" + GraduationYear + "']")).Click();
+
+            // Click on save button
+            AddButton.Click();
+            Thread.Sleep(5000);
+
+        }
+
         public bool IsEducationRecordPresent(string University, string Country, string Title, string Degree, string GraduationYear, int rowNumber = 0)
         {
             bool recordPresent = false;
@@ -199,6 +226,75 @@ namespace MarsQACompetitionTaskNUnit.Pages
             UpdateButton.Click();
             Thread.Sleep(5000);
         }
+
+        public void EditEducationWithSomeData(string University, string Country, string Title, string Degree, string GraduationYear)
+        {
+            try
+            {
+
+                WaitUtils.WaitToBeVisible(driver, "Xpath", "LastEditPencilIcon", 10);
+                LastEditPencilIcon.Click();
+
+                // Update University if a value is provided
+                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
+                UniversityTextbox.Clear();
+                UniversityTextbox.SendKeys(Keys.Tab);  // Trigger blur event
+                Console.WriteLine("UniversityTextbox cleared.");
+                if (!string.IsNullOrEmpty(University))
+                {
+
+                    UniversityTextbox.SendKeys(University);
+                }
+                else
+                {
+                    Console.WriteLine("UniversityTextbox remains empty.");
+                }
+
+                CountryDropdown.Click();
+                WaitUtils.WaitToBeVisible(driver, "Xpath", "CountryDropdown", 30);
+                IWebElement EditCountryOption = driver.FindElement(By.XPath("//*[@value='" + Country + "']"));
+                EditCountryOption.Click();
+                Console.WriteLine($"CountryDropdown set to: {Country}");
+
+                TitleDropdown.Click();
+                WaitUtils.WaitToBeVisible(driver, "Xpath", "TitleDropdown", 30);
+                IWebElement TitleOption = driver.FindElement(By.XPath("//*[@value='" + Title + "']"));
+                TitleOption.Click();
+                Console.WriteLine($"TitleDropdown set to: {Title}");
+
+                // Update Degree if a value is provided
+                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
+                DegreeTextbox.Clear();
+                DegreeTextbox.SendKeys(Keys.Tab);  // Trigger blur event
+                Console.WriteLine("DegreeTextbox cleared.");
+                if (!string.IsNullOrEmpty(Degree))
+                {
+
+                    DegreeTextbox.SendKeys(Degree);
+                }
+                else
+                {
+                    Console.WriteLine("DegreeTextbox remains empty.");
+                }
+
+                GraduationYearDropdown.Click();
+                WaitUtils.WaitToBeVisible(driver, "Xpath", "GraduationYearDropdown", 30);
+                IWebElement GraduationYearOption = driver.FindElement(By.XPath("//*[@value='" + GraduationYear + "']"));
+                GraduationYearOption.Click();
+                Console.WriteLine($"GraduationYearDropdown set to: {GraduationYear}");
+
+                WaitUtils.WaitToBeClickable(driver, "Xpath", "UpdateButton", 30);
+                UpdateButton.Click();
+                Console.WriteLine("Update button clicked.");
+                Thread.Sleep(5000);
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception occurred while editing education record: {ex.Message}");
+            }
+        }
+    
 
         public void DeleteLastEducationRecords()
         {

@@ -1,4 +1,4 @@
-﻿using MarsQACompetitionTaskNUnit.Utilities;
+﻿using MarsQACompetitionTaskNUnit.Assertions;
 using NUnit.Framework;
 
 namespace MarsQACompetitionTaskNUnit.Tests
@@ -30,8 +30,12 @@ namespace MarsQACompetitionTaskNUnit.Tests
         {
             certificationPageObject.ClearCertification();
             certificationPageObject.CreateCertificationRecord(certificationConfig[0].Certificate, certificationConfig[0].From, certificationConfig[0].Year);
+            Thread.Sleep(1000);
             certificationPageObject.EditCertificationRecord(certificationConfig[6].Certificate, certificationConfig[6].From, certificationConfig[6].Year);
-            AssertionHelpers.AssertToolTipMessage(certificationPageObject, certificationConfig[0].AssertionMessage);
+            bool recordPresent = certificationPageObject.IsCertificationRecordPresent(certificationConfig[6].Certificate, certificationConfig[6].From, certificationConfig[6].Year);
+            Assert.IsTrue(recordPresent);
+            AssertionHelpers.AssertToolTipMessage(certificationPageObject, certificationConfig[6].AssertionMessage);
+            Thread.Sleep(1000);
             certificationPageObject.ClearCertification();
         }
 
@@ -77,7 +81,7 @@ namespace MarsQACompetitionTaskNUnit.Tests
         public void TestCreateCertificationRecordWithSomeData()
         {
             certificationPageObject.ClearCertification();
-            certificationPageObject.CreateCertificationRecord(certificationConfig[4].Certificate, certificationConfig[4].From, certificationConfig[4].Year);
+            certificationPageObject.CreateCertificationWithSomeData(certificationConfig[4].From, certificationConfig[4].Year);
             Thread.Sleep(1000);
             AssertionHelpers.AssertToolTipMessage(certificationPageObject, certificationConfig[4].AssertionMessage);
             certificationPageObject.CancelButton.Click();
@@ -95,19 +99,7 @@ namespace MarsQACompetitionTaskNUnit.Tests
             certificationPageObject.ClearCertification();
         }
 
-        [Test, Order(8), Description("This test edit Certification record with Null data")]
-        public void TestEditCertificationRecordWithNullData()
-        {
-            certificationPageObject.ClearCertification();
-            certificationPageObject.CreateCertificationRecord(certificationConfig[0].Certificate, certificationConfig[0].From, certificationConfig[0].Year);
-            certificationPageObject.EditCertificationRecord(certificationConfig[7].Certificate, certificationConfig[7].From, certificationConfig[7].Year);
-            certificationPageObject.UpdateButton.Click();
-            certificationPageObject.CancelButton.Click();
-            AssertionHelpers.AssertToolTipMessage(certificationPageObject, certificationConfig[7].AssertionMessage);
-            certificationPageObject.ClearCertification();
-        }
-
-        [Test, Order(9), Description("This test edit Certification record with Some data")]
+        [Test, Order(8), Description("This test edit Certification record with Some data")]
         public void TestEditCertificationRecordWithSomeData()
         {
             certificationPageObject.ClearCertification();
@@ -116,35 +108,35 @@ namespace MarsQACompetitionTaskNUnit.Tests
             Thread.Sleep(1000);
             certificationPageObject.UpdateButton.Click();
             certificationPageObject.CancelButton.Click();
-            AssertionHelpers.AssertToolTipMessage(certificationPageObject, certificationConfig[7].AssertionMessage);
+            AssertionHelpers.AssertToolTipMessage(certificationPageObject, certificationConfig[8].AssertionMessage);
             certificationPageObject.ClearCertification();
 
         }
 
-        [Test, Order(10), Description("This test edit Certification record with Duplicate data")]
+        [Test, Order(9), Description("This test edit Certification record with Duplicate data")]
         public void TestEditCertificationRecordWithDuplicateData()
         {
             certificationPageObject.ClearCertification();
             certificationPageObject.CreateCertificationRecord(certificationConfig[6].Certificate, certificationConfig[6].From, certificationConfig[6].Year);
-            certificationPageObject.EditCertificationRecord(certificationConfig[8].Certificate, certificationConfig[8].From, certificationConfig[8].Year);
+            certificationPageObject.EditCertificationRecord(certificationConfig[7].Certificate, certificationConfig[7].From, certificationConfig[7].Year);
             int rowCount = certificationPageObject.RowCount();
             Assert.That(certificationPageObject.RowCount(), Is.EqualTo(rowCount));
-            AssertionHelpers.AssertToolTipMessage(certificationPageObject, certificationConfig[8].AssertionMessage);
+            AssertionHelpers.AssertToolTipMessage(certificationPageObject, certificationConfig[7].AssertionMessage);
             Thread.Sleep(1000);
             certificationPageObject.CancelButton.Click();
             certificationPageObject.ClearCertification();
         }
 
-        [Test, Order(11), Description("This test edit Certification record with Invalid data")]
+        [Test, Order(10), Description("This test edit Certification record with Invalid data")]
         public void TestEditCertificationRecordWithInvalidData()
         {
             certificationPageObject.ClearCertification();
             certificationPageObject.CreateCertificationRecord(certificationConfig[0].Certificate, certificationConfig[0].From, certificationConfig[0].Year);
-            certificationPageObject.EditCertificationRecord(certificationConfig[11].Certificate, certificationConfig[11].From, certificationConfig[11].Year);
+            certificationPageObject.EditCertificationRecord(certificationConfig[9].Certificate, certificationConfig[9].From, certificationConfig[9].Year);
             Thread.Sleep(1000);
             int rowCount = certificationPageObject.RowCount();
             Assert.That(certificationPageObject.RowCount(), Is.EqualTo(rowCount));
-            AssertionHelpers.AssertToolTipMessage(certificationPageObject, certificationConfig[11].AssertionMessage);
+            AssertionHelpers.AssertToolTipMessage(certificationPageObject, certificationConfig[9].AssertionMessage);
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using MarsQACompetitionTaskNUnit.Pages;
 using MarsQACompetitionTaskNUnit.Utilities;
+using MarsQACompetitionTaskNUnit.Utilities.JsonReader;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
@@ -17,10 +18,11 @@ namespace MarsQACompetitionTaskNUnit.Tests
         protected List<EducationConfig> educationConfig;
         protected List<CertificationConfig> certificationConfig;
 
+        // Called once prior to executing any of the tests in a fixture
         [OneTimeSetUp]
         public void BaseFixtureSetup()
         {
-            ExtentManager.CreateTest(GetType().Name);
+            
             AppConfig config = AppConfig.LoadConfig();
             CommonDriver driverSetup = new CommonDriver();
             driver = driverSetup.Initialize();
@@ -44,6 +46,7 @@ namespace MarsQACompetitionTaskNUnit.Tests
             return driver;
         }
 
+        // Called once after executing any of the tests in a fixture
         [OneTimeTearDown]
         public void BaseFixtureTeardown()
         {
@@ -51,6 +54,7 @@ namespace MarsQACompetitionTaskNUnit.Tests
             driver?.Dispose();
         }
 
+        // Called before each test method in the derived class
         [SetUp]
         public void BaseSetup()
         {
@@ -59,26 +63,20 @@ namespace MarsQACompetitionTaskNUnit.Tests
             
         }
 
+        // Performed after each test method in derived class
         [TearDown]
         public void BaseTearDown()
         {
             try
             {
                 // Log test results to ExtentReports
-                EndTest();
-
-                // Flush ExtentReports
-                ExtentManager.GetExtent().Flush();
-                
+                EndTest();                                
             }
             catch (Exception ex)
             {
                 throw new Exception("Exception: " + ex);
             }
-            finally
-            {
-                driver.Quit();
-            }
+            
         }
 
         public void EndTest()

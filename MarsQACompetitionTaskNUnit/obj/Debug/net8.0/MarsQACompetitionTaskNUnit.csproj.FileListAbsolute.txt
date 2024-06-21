@@ -3,10 +3,10 @@ C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\MarsQACo
 C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\MarsQACompetitionTaskNUnit\obj\Debug\net8.0\MarsQACompetitionTaskNUnit.AssemblyInfoInputs.cache
 C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\MarsQACompetitionTaskNUnit\obj\Debug\net8.0\MarsQACompetitionTaskNUnit.AssemblyInfo.cs
 C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\MarsQACompetitionTaskNUnit\obj\Debug\net8.0\MarsQACompetitionTaskNUnit.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debug\net8.0\selenium-manager\macos\selenium-manager
 C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debug\net8.0\testhost.dll
 C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debug\net8.0\testhost.exe
 C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debug\net8.0\selenium-manager\linux\selenium-manager
-C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debug\net8.0\selenium-manager\macos\selenium-manager
 C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debug\net8.0\selenium-manager\windows\selenium-manager.exe
 C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debug\net8.0\NUnit3.TestAdapter.dll
 C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debug\net8.0\NUnit3.TestAdapter.pdb
@@ -15,10 +15,11 @@ C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debu
 C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debug\net8.0\nunit.engine.core.dll
 C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debug\net8.0\testcentric.engine.metadata.dll
 C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debug\net8.0\MarsQACompetitionTaskNUnit.exe
-C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debug\net8.0\Appsetting.json
-C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debug\net8.0\CertificationTestData.json
-C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debug\net8.0\EducationTestData.json
-C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debug\net8.0\LoginTestData.json
+C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debug\net8.0\Utilities\JsonReader\AppConfig.cs
+C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debug\net8.0\TestData\Appsetting.json
+C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debug\net8.0\TestData\CertificationTestData.json
+C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debug\net8.0\TestData\EducationTestData.json
+C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debug\net8.0\TestData\LoginTestData.json
 C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debug\net8.0\MarsQACompetitionTaskNUnit.deps.json
 C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debug\net8.0\MarsQACompetitionTaskNUnit.runtimeconfig.json
 C:\Users\Lenovo\Prasanna\MarsCompetitionTask\MarsQACompetitionTaskNUnit\bin\Debug\net8.0\MarsQACompetitionTaskNUnit.dll
