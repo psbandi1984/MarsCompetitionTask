@@ -1,0 +1,10 @@
+﻿[
+  {
+    "OriginalCertificate": "Test Analyst",
+    "Certificate": null,
+    "From": null,
+    "Year": "2024",
+    "AssertionMessage": "Please enter Certification Name, Certification From and Certification Year",
+    "IsValid": false
+  }
+]

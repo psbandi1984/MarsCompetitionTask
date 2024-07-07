@@ -1,144 +1,185 @@
 ﻿using MarsQACompetitionTaskNUnit.Assertions;
+using MarsQACompetitionTaskNUnit.Utilities.JsonReader;
 using NUnit.Framework;
 
 namespace MarsQACompetitionTaskNUnit.Tests
 {
-    [Parallelizable]
     [TestFixture]
+    [Parallelizable]
     public class CertificationTest: BaseTest 
     {
         [SetUp]
         public void SetUpCertification()
         {           
             certificationPageObject.NavigateToCertificationTab();
+            certificationPageObject.ClearCertification();
             Thread.Sleep(1000);
         }
 
-        [Test, Order(1), Description("This test create a new Certification record")]
-        public void TestCreateCertificationRecord()
-        {         
-            certificationPageObject.ClearCertification();
-            certificationPageObject.CreateCertificationRecord(certificationConfig[0].Certificate, certificationConfig[0].From, certificationConfig[0].Year);
-            AssertionHelpers.AssertToolTipMessage(certificationPageObject, certificationConfig[0].AssertionMessage);
-            bool recordPresent = certificationPageObject.IsCertificationRecordPresent(certificationConfig[0].Certificate, certificationConfig[0].From, certificationConfig[0].Year);
-            Assert.IsTrue(recordPresent);
-            certificationPageObject.ClearCertification();
-        }
-
-        [Test, Order(2), Description("This test edit  Certification record")]
-        public void TestEditCertificationRecord()
+        [Test, Order(1), Description("This test create a new Certification record with valid data")]
+        public void TestCreateCertificationWithVaildData()
         {
-            certificationPageObject.ClearCertification();
-            certificationPageObject.CreateCertificationRecord(certificationConfig[0].Certificate, certificationConfig[0].From, certificationConfig[0].Year);
-            Thread.Sleep(1000);
-            certificationPageObject.EditCertificationRecord(certificationConfig[6].Certificate, certificationConfig[6].From, certificationConfig[6].Year);
-            bool recordPresent = certificationPageObject.IsCertificationRecordPresent(certificationConfig[6].Certificate, certificationConfig[6].From, certificationConfig[6].Year);
-            Assert.IsTrue(recordPresent);
-            AssertionHelpers.AssertToolTipMessage(certificationPageObject, certificationConfig[6].AssertionMessage);
-            Thread.Sleep(1000);
-            certificationPageObject.ClearCertification();
+            // Load test data for creating certification
+            List<CertificationConfig> testData = CertificationConfig.LoadCreateCertificationWithValidData();
+
+            foreach (var certification in testData)
+            {
+                certificationPageObject.CreateCertificationRecord(certification);
+                AssertionHelpers.AssertToolTipMessage(certificationPageObject, certification.AssertionMessage);
+                bool recordPresent = certificationPageObject.IsCertificationRecordPresent(certification);
+                Assert.That(recordPresent, Is.True);
+                certificationPageObject.DeleteLastCertificationRecords();
+            }
         }
 
-        [Test, Order(3), Description("This test delete specific Certification record")]
-        public void TestDeleteCertificationRecord()
+
+        [Test, Order(2), Description("This test edits Certification records with valid data")]
+        public void TestEditCertificationRecords()
         {
-            certificationPageObject.ClearCertification();
-            certificationPageObject.CreateCertificationRecord(certificationConfig[0].Certificate, certificationConfig[0].From, certificationConfig[0].Year);
-            Thread.Sleep(3000);
-            certificationPageObject.DeleteLastCertificationRecords();
-            AssertionHelpers.AssertToolTipMessage(certificationPageObject, certificationConfig[2].AssertionMessage);
-            bool recordPresent = certificationPageObject.IsCertificationRecordPresent(certificationConfig[0].Certificate, certificationConfig[0].From, certificationConfig[0].Year);
-            Assert.IsFalse(recordPresent);
+            List<CertificationConfig> createData = CertificationConfig.LoadCreateCertificationWithValidData();
+            List<CertificationConfig> editData = CertificationConfig.LoadEditCertificationWithValidData();
+
+            foreach (var initialcertification in createData)
+            {
+
+                certificationPageObject.CreateCertificationRecord(initialcertification);
+                AssertionHelpers.AssertToolTipMessage(certificationPageObject, initialcertification.AssertionMessage);
+            }
+
+            foreach (var certification in editData)
+            {
+                CertificationConfig originalCertification = createData.FirstOrDefault(c => c.Certificate == certification.OriginalCertificate);
+
+                if (originalCertification != null)
+                {
+                    certificationPageObject.SelectCertificationRecord(originalCertification);                      
+                    certificationPageObject.EditCertificationRecord(certification);
+                    AssertionHelpers.AssertToolTipMessage(certificationPageObject, certification.AssertionMessage);
+                    Thread.Sleep(1000);
+                    bool recordPresent = certificationPageObject.IsCertificationRecordPresent(certification);
+                    Assert.That(recordPresent, Is.True);                        
+                }
+            }
+            foreach (var certification in editData)
+            {
+                certificationPageObject.DeleteLastCertificationRecords();
+            }
         }
 
-        [Test, Order(4), Description("This test add Certification record with Null data")]
+        [Test, Order(3), Description("This test deletes Certification records")]
+        public void TestDeleteCertificationRecords()
+        {
+            List<CertificationConfig> testData = CertificationConfig.LoadDeleteCertification();
+
+            foreach (var certification in testData)
+            {
+                certificationPageObject.CreateCertificationRecord(certification);
+                bool recordPresentBeforeDeletion = certificationPageObject.IsCertificationRecordPresent(certification);
+
+                if (recordPresentBeforeDeletion)
+                {
+                    certificationPageObject.DeleteLastCertificationRecords();
+                    AssertionHelpers.AssertToolTipMessage(certificationPageObject, certification.AssertionMessage);
+                    bool recordPresent = certificationPageObject.IsCertificationRecordPresent(certification);
+                    Assert.That(recordPresent, Is.False);
+                }
+            }
+        }
+                                    
+
+        [Test, Order(4), Description("This test add Certification record with null data")]
         public void TestCreateCertificationRecordWithNullData()
         {
-            certificationPageObject.ClearCertification();
-            certificationPageObject.AddNewButton.Click();
-            certificationPageObject.AddButton.Click();
-            AssertionHelpers.AssertToolTipMessage(certificationPageObject, certificationConfig[1].AssertionMessage);
-            certificationPageObject.CancelButton.Click();
-            Thread.Sleep(1000);
+            List<CertificationConfig> testData = CertificationConfig.LoadCreateCertificationWithNullData();
+
+            foreach (var certification in testData)
+            {
+                certificationPageObject.CreateCertificationRecord(certification);
+                bool recordPresent = certificationPageObject.IsCertificationRecordPresent(certification);
+                Assert.That(recordPresent, Is.False);
+                certificationPageObject.CancelButton.Click();
+                Thread.Sleep(1000);
+            }
         }
+               
 
         [Test, Order(5), Description("This test add Certification record with Duplicate data")]
         public void TestCreateCertificationRecordWithDuplicateData()
         {
-            certificationPageObject.ClearCertification();
-            certificationPageObject.CreateCertificationRecord(certificationConfig[0].Certificate, certificationConfig[0].From, certificationConfig[0].Year);
+            List<CertificationConfig> createData = CertificationConfig.LoadCreateCertificationWithValidData();
+            List<CertificationConfig> testData = CertificationConfig.LoadCreateCertificationWithDuplicateData();
+
+            CertificationConfig initialCertification = createData.First();
+            CertificationConfig certification = testData.First();
+                                   
+            certificationPageObject.CreateCertificationRecord(initialCertification);
+            AssertionHelpers.AssertToolTipMessage(certificationPageObject, initialCertification.AssertionMessage);
+                               
+            certificationPageObject.CreateCertificationRecord(certification);
+            AssertionHelpers.AssertToolTipMessage(certificationPageObject, certification.AssertionMessage);
+            certificationPageObject.CancelButton.Click();
             Thread.Sleep(1000);
-            certificationPageObject.CreateCertificationRecord(certificationConfig[3].Certificate, certificationConfig[3].From, certificationConfig[3].Year);
-            AssertionHelpers.AssertToolTipMessage(certificationPageObject, certificationConfig[3].AssertionMessage);
             int rowCount = certificationPageObject.RowCount();
             Assert.That(certificationPageObject.RowCount(), Is.EqualTo(rowCount));
-            Thread.Sleep(1000);
-            certificationPageObject.ClearCertification();
 
+            certificationPageObject.DeleteLastCertificationRecords();
+                      
         }
 
-        [Test, Order(6), Description("This test add Certification record with some data")]
-        public void TestCreateCertificationRecordWithSomeData()
-        {
-            certificationPageObject.ClearCertification();
-            certificationPageObject.CreateCertificationWithSomeData(certificationConfig[4].From, certificationConfig[4].Year);
-            Thread.Sleep(1000);
-            AssertionHelpers.AssertToolTipMessage(certificationPageObject, certificationConfig[4].AssertionMessage);
-            certificationPageObject.CancelButton.Click();
-            Thread.Sleep(1000);
-        }
 
-        [Test, Order(7), Description("This test add Certification record with Invalid data")]
-        public void TestCreateCertificationRecordWithInvalidData()
-        {
-            certificationPageObject.ClearCertification();
-            certificationPageObject.CreateCertificationRecord(certificationConfig[5].Certificate, certificationConfig[5].From, certificationConfig[5].Year);
-            AssertionHelpers.AssertToolTipMessage(certificationPageObject, certificationConfig[5].AssertionMessage);
-            bool recordPresent = certificationPageObject.IsCertificationRecordPresent(certificationConfig[5].Certificate, certificationConfig[5].From, certificationConfig[5].Year);
-            Assert.IsTrue(recordPresent);
-            certificationPageObject.ClearCertification();
-        }
-
-        [Test, Order(8), Description("This test edit Certification record with Some data")]
-        public void TestEditCertificationRecordWithSomeData()
-        {
-            certificationPageObject.ClearCertification();
-            certificationPageObject.CreateCertificationRecord(certificationConfig[0].Certificate, certificationConfig[0].From, certificationConfig[0].Year);
-            certificationPageObject.EditCertificationRecord(certificationConfig[8].Certificate, certificationConfig[8].From, certificationConfig[8].Year);
-            Thread.Sleep(1000);
-            certificationPageObject.UpdateButton.Click();
-            certificationPageObject.CancelButton.Click();
-            AssertionHelpers.AssertToolTipMessage(certificationPageObject, certificationConfig[8].AssertionMessage);
-            certificationPageObject.ClearCertification();
-
-        }
-
-        [Test, Order(9), Description("This test edit Certification record with Duplicate data")]
+        [Test, Order(6), Description("This test edits Certification record with duplicate data")]
         public void TestEditCertificationRecordWithDuplicateData()
         {
-            certificationPageObject.ClearCertification();
-            certificationPageObject.CreateCertificationRecord(certificationConfig[6].Certificate, certificationConfig[6].From, certificationConfig[6].Year);
-            certificationPageObject.EditCertificationRecord(certificationConfig[7].Certificate, certificationConfig[7].From, certificationConfig[7].Year);
-            int rowCount = certificationPageObject.RowCount();
-            Assert.That(certificationPageObject.RowCount(), Is.EqualTo(rowCount));
-            AssertionHelpers.AssertToolTipMessage(certificationPageObject, certificationConfig[7].AssertionMessage);
-            Thread.Sleep(1000);
+            List<CertificationConfig> createData = CertificationConfig.LoadCreateCertificationWithValidData();
+            List<CertificationConfig> editData = CertificationConfig.LoadEditCertificationWithDuplicateData();
+
+            CertificationConfig initialCertification = createData.First();  
+            CertificationConfig editCertification = editData.First();
+
+            certificationPageObject.CreateCertificationRecord(initialCertification);
+            AssertionHelpers.AssertToolTipMessage(certificationPageObject, initialCertification.AssertionMessage);
+
+            certificationPageObject.SelectCertificationRecord(initialCertification);
+            certificationPageObject.EditCertificationRecord(editCertification);
+            AssertionHelpers.AssertToolTipMessage(certificationPageObject, editCertification.AssertionMessage);
+            Thread.Sleep(3000);
             certificationPageObject.CancelButton.Click();
-            certificationPageObject.ClearCertification();
-        }
-
-        [Test, Order(10), Description("This test edit Certification record with Invalid data")]
-        public void TestEditCertificationRecordWithInvalidData()
-        {
-            certificationPageObject.ClearCertification();
-            certificationPageObject.CreateCertificationRecord(certificationConfig[0].Certificate, certificationConfig[0].From, certificationConfig[0].Year);
-            certificationPageObject.EditCertificationRecord(certificationConfig[9].Certificate, certificationConfig[9].From, certificationConfig[9].Year);
             Thread.Sleep(1000);
             int rowCount = certificationPageObject.RowCount();
             Assert.That(certificationPageObject.RowCount(), Is.EqualTo(rowCount));
-            AssertionHelpers.AssertToolTipMessage(certificationPageObject, certificationConfig[9].AssertionMessage);
+                       
+            certificationPageObject.DeleteLastCertificationRecords();
+                        
         }
 
+
+        [Test, Order(7), Description("This test edits Certification record with null data")]
+        public void TestEditCertificationRecordWithNullData()
+        {
+            List<CertificationConfig> createData = CertificationConfig.LoadCreateCertificationWithValidData();
+            List<CertificationConfig> editData = CertificationConfig.LoadEditCertificationWithNullData();
+
+            CertificationConfig initialCertification = createData.First();
+            CertificationConfig editCertification = editData.First();
+
+            certificationPageObject.CreateCertificationRecord(initialCertification);
+            AssertionHelpers.AssertToolTipMessage(certificationPageObject, initialCertification.AssertionMessage);
+            Console.WriteLine($"Created initial record with Certificate: {initialCertification.Certificate}, From: {initialCertification.From}, Year: {initialCertification.Year}");
+
+            certificationPageObject.SelectCertificationRecord(initialCertification);
+            certificationPageObject.EditCertificationRecord(editCertification);
+            AssertionHelpers.AssertToolTipMessage(certificationPageObject, editCertification.AssertionMessage);
+            Console.WriteLine($"Edited record to Certificate: {editCertification.Certificate}, From: {editCertification.From}, Year: {editCertification.Year}");
+            //certificationPageObject.CancelButton.Click();
+            //Thread.Sleep(1000);
+            bool recordPresent = certificationPageObject.IsCertificationRecordPresent(editCertification);
+            Assert.That(recordPresent, Is.False);
+
+            Console.WriteLine($"Record presence after edit: {recordPresent}");
+
+            certificationPageObject.DeleteLastCertificationRecords();
+
+        }
 
     }
 }

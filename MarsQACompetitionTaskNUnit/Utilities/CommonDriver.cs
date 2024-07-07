@@ -14,14 +14,12 @@ namespace MarsQACompetitionTaskNUnit.Utilities
         public CommonDriver(IWebDriver driver)
         {
             this.driver = driver;
-
         }
 
         public IWebDriver Initialize()
         {
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
-
             return driver;
         }
 

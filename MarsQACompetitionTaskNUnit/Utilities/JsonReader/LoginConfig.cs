@@ -9,7 +9,7 @@ namespace MarsQACompetitionTaskNUnit.Utilities.JsonReader
         public static List<LoginConfig> LoadConfig()
         {
             // Load JSON data from the file
-            string jsonFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData", "LoginTestData.json");
+            string jsonFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData", "Login", "LoginTestData.json");
             string jsonString = File.ReadAllText(jsonFilePath);
 
             //deserialization of data

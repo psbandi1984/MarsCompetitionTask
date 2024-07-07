@@ -1,0 +1,23 @@
+﻿[
+  {
+    "OriginalEducation": "AUT",
+    "University": "ANU",
+    "Country": "Australia",
+    "Title": "M.Tech",
+    "Degree": "Computer Science & Technology",
+    "GraduationYear": "2024",
+    "AssertionMessage": "Education as been updated"
+
+  },
+
+  {
+    "OriginalEducation": "@$#12ABcd345678901234567890123456789012345678901234567890123456789",
+    "University": "!@#12@$#12ABcd345678901234567890123456789012345678901234567890123456789",
+    "Country": "Australia",
+    "Title": "M.Tech",
+    "Degree": "!@#12@$#12ABcd345678901234567890123456789012345678901234567890123456789",
+    "GraduationYear": "2024",
+    "AssertionMessage": "Education as been updated"
+  }
+
+]

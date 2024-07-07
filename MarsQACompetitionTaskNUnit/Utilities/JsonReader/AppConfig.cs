@@ -10,7 +10,7 @@ namespace MarsQACompetitionTaskNUnit.Utilities.JsonReader
         public static AppConfig LoadConfig()
         {
             // Load JSON data from the file
-            string jsonFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData", "Appsetting.json");
+            string jsonFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData", "Appsetting", "Appsetting.json");
             string jsonString = File.ReadAllText(jsonFilePath);
 
             //deserialization of data

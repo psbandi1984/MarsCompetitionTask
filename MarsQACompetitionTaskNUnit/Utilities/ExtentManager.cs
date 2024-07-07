@@ -7,24 +7,30 @@ namespace MarsQACompetitionTaskNUnit.Utilities
     public static class ExtentManager
     {
         public static ExtentReports extent;
-        public static ExtentTest test;
 
+        [ThreadStatic]
+        public static ExtentTest test;
+                
         public static ExtentReports GetExtent()
         {
+                                        
             if (extent == null)
             {
-                var reportPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"..\..\..\..\Reports\");                                     
+                var reportPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"..\..\..\..\Reports\");
                 Directory.CreateDirectory(reportPath);
-                var htmlReporter = new ExtentHtmlReporter(Path.Combine(reportPath, "ExtentReport.html"));
+                        
+                var sparkReporter = new ExtentSparkReporter(Path.Combine(reportPath, "ExtentReport.html"));
                 extent = new ExtentReports();
-                extent.AttachReporter(htmlReporter);
+                extent.AttachReporter(sparkReporter);
             }
+                         
             return extent;
         }
 
         public static void CreateTest(string testName)
         {
             test = GetExtent().CreateTest(testName);
+
             
         }
 

@@ -51,7 +51,7 @@
             },
             "ExtentReports": {
               "target": "Package",
-              "version": "[4.1.0, )"
+              "version": "[5.0.4, )"
             },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
@@ -71,7 +71,7 @@
             },
             "NUnit": {
               "target": "Package",
-              "version": "[3.13.3, )"
+              "version": "[4.1.0, )"
             },
             "NUnit.Analyzers": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -85,15 +85,15 @@
             },
             "Selenium.Support": {
               "target": "Package",
-              "version": "[4.21.0, )"
+              "version": "[4.22.0, )"
             },
             "Selenium.WebDriver": {
               "target": "Package",
-              "version": "[4.21.0, )"
+              "version": "[4.22.0, )"
             },
             "Selenium.WebDriver.ChromeDriver": {
               "target": "Package",
-              "version": "[126.0.6478.6200, )"
+              "version": "[126.0.6478.6300, )"
             },
             "System.Drawing.Common": {
               "target": "Package",

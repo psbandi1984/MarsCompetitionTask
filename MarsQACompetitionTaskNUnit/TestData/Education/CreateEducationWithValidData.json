@@ -1,0 +1,19 @@
+﻿[
+  {
+    "University": "AUT",
+    "Country": "New Zealand",
+    "Title": "B.Tech",
+    "Degree": "Computer Science",
+    "GraduationYear": "2021",
+    "AssertionMessage": "Education has been added"
+  },
+
+  {
+    "University": "@$#12ABcd345678901234567890123456789012345678901234567890123456789",
+    "Country": "New Zealand",
+    "Title": "B.Tech",
+    "Degree": "@$#12ABcd345678901234567890123456789012345678901234567890123456789",
+    "GraduationYear": "2015",
+    "AssertionMessage": "Education has been added"
+  }
+]

@@ -1,0 +1,12 @@
+﻿[
+  {
+
+    "University": null,
+    "Country": "New Zealand",
+    "Title": "B.Tech",
+    "Degree": null,
+    "GraduationYear": "2021",
+    "AssertionMessage": "Please enter all the fields",
+    "IsValid": false
+  }
+]
